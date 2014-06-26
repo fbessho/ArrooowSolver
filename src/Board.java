@@ -163,4 +163,27 @@ public class Board
         int column = i % 5;
         return tappable(row, column);
     }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Board board = (Board) o;
+
+        if (arrows != board.arrows) return false;
+        if (existence != board.existence) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = (int) (arrows ^ (arrows >>> 32));
+        result = 31 * result + existence;
+        return result;
+    }
 }
