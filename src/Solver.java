@@ -9,6 +9,9 @@ public class Solver
 {
     public List<Integer> solve(Board board)
     {
+        if(board.isSolved())
+            return FastList.newList();
+
         for (int i = 0; i < 25; i++) {
             if (board.tappable(i)) {
                 List<Integer> tapSequence = solve(board.tap(i));
@@ -19,6 +22,8 @@ public class Solver
                 }
             }
         }
+
+        // unsolved
         return null;
     }
 }
