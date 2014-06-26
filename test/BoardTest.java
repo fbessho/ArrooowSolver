@@ -17,7 +17,7 @@ public class BoardTest
     @Test
     public void testArrowExistsAt() throws Exception
     {
-        Board board = Board.createFromString("ttttt" + "     " + "     " + "     " + "     ");
+        Board board = Board.createFromString("ttttt" + "....." + "....." + "....." + ".....");
         for (int i = 0; i < 5; i++) {
             Assert.assertTrue(board.arrowExistsAt(i));
         }
@@ -48,7 +48,7 @@ public class BoardTest
     {
         Board board = Board.createFromString("tttttrrrrrlllllbbbbbttttt");
         Board newBoard = Board.removeUntilTermination(6, board);
-        Assert.assertEquals(Board.createFromString("ttttt" + "r    " + "lllll" + "bbbbb" + "ttttt"), newBoard);
+        Assert.assertEquals(Board.createFromString("ttttt" + "r...." + "lllll" + "bbbbb" + "ttttt"), newBoard);
     }
 
     @Test
@@ -86,17 +86,17 @@ public class BoardTest
     public void testDropDown() throws Exception
     {
         Board board = Board.createFromString(
-                /*    */  "tt t "
-                        + "r rr "
-                        + "ll  l"
-                        + "b   b"
-                        + "ttt t"
+                /*    */  "tt.t."
+                        + "r.rr."
+                        + "ll..l"
+                        + "b...b"
+                        + "ttt.t"
         );
 
         Board expectedBoard = Board.createFromString(
-                /*    */  "t    "
-                        + "r    "
-                        + "lt  l"
+                /*    */  "t...."
+                        + "r...."
+                        + "lt..l"
                         + "blrtb"
                         + "tttrt"
         );
@@ -108,19 +108,19 @@ public class BoardTest
     public void testDropLeft() throws Exception
     {
         Board board = Board.createFromString(
-                /*    */  "tt t "
-                        + "r rr "
-                        + "ll  l"
-                        + "b   b"
-                        + "ttt t"
+                /*    */  "tt.t."
+                        + "r.rr."
+                        + "ll..l"
+                        + "b...b"
+                        + "ttt.t"
         );
 
         Board expectedBoard = Board.createFromString(
-                /*    */  "ttt  "
-                        + "rrr  "
-                        + "lll  "
-                        + "bb   "
-                        + "tttt "
+                /*    */  "ttt.."
+                        + "rrr.."
+                        + "lll.."
+                        + "bb..."
+                        + "tttt."
         );
 
         Assert.assertEquals(expectedBoard, board.dropLeft());
@@ -129,7 +129,7 @@ public class BoardTest
     @Test
     public void testToString() throws Exception
     {
-        String string = "ttttt rrrrlllllbbbbbttttt";
+        String string = "ttttt.rrrrlllllbbbbbttttt";
         Assert.assertEquals(string, Board.createFromString(string).toString());
     }
 
@@ -137,19 +137,19 @@ public class BoardTest
     public void testRemoveBlankColumns() throws Exception
     {
         Board board = Board.createFromString(
-                /*    */  "tt   "
-                        + "r    "
-                        + "ll  l"
-                        + "b   b"
-                        + "tt  t"
+                /*    */  "tt..."
+                        + "r...."
+                        + "ll..l"
+                        + "b...b"
+                        + "tt..t"
         );
 
         Board expectedBoard = Board.createFromString(
-                /*    */  "tt   "
-                        + "r    "
-                        + "lll  "
-                        + "b b  "
-                        + "ttt  "
+                /*    */  "tt..."
+                        + "r...."
+                        + "lll.."
+                        + "b.b.."
+                        + "ttt.."
         );
 
         Assert.assertEquals(expectedBoard, board.removeBlankColumns());

@@ -12,6 +12,8 @@ public class Board
     private static final int[] dy = {-1, 0, 1, 0};
 
     private static final char[] arrowTypes = {'t', 'r', 'b', 'l'};
+    private static final String BLANK = ".";
+    private static final char BLANK_C = BLANK.charAt(0);
 
     long arrows;
     int existence;
@@ -25,17 +27,17 @@ public class Board
         // existence
         int existence = 0;
         for (int i = 0; i < 25; i++) {
-            if (s.charAt(i) != ' ') {
+            if (s.charAt(i) != BLANK_C) {
                 existence += 1 << (24 - i);
             }
         }
 
         // arrows
-        s = s.replaceAll("t", "00");
-        s = s.replaceAll("r", "01");
-        s = s.replaceAll("b", "10");
-        s = s.replaceAll("l", "11");
-        s = s.replaceAll(" ", "00");
+        s = s.replace("t", "00");
+        s = s.replace("r", "01");
+        s = s.replace("b", "10");
+        s = s.replace("l", "11");
+        s = s.replace(BLANK, "00");
         long arrows = Long.parseLong(s, 2);
 
         return new Board(arrows, existence);
@@ -198,7 +200,7 @@ public class Board
             String sn = s.substring(row * 5, row * 5 + 5);
             sb.append(sn.substring(0, column));
             sb.append(sn.substring(column + 1));
-            sb.append(' ');
+            sb.append(BLANK);
         }
 
         return Board.createFromString(sb.toString());
@@ -250,11 +252,11 @@ public class Board
 
         for (int row = 0; row < 5; row++) {
             String si = s.substring(row * 5, (row + 1) * 5); // String of each row
-            int numOfSpace = StringUtils.countMatches(si, " ");
+            int numOfSpace = StringUtils.countMatches(si, BLANK);
 
-            sb.append(si.replaceAll(" ", ""));
+            sb.append(si.replace(BLANK, ""));
             for (int i = 0; i < numOfSpace; i++) {
-                sb.append(' ');
+                sb.append(BLANK);
             }
         }
 
@@ -293,7 +295,7 @@ public class Board
                 sb.append(arrowTypes[arrowType]);
             }
             else {
-                sb.append(' ');
+                sb.append(BLANK);
             }
         }
 
