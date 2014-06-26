@@ -47,12 +47,6 @@ public class Board
         this.existence = existence;
     }
 
-
-    private Board tap(int row, int column)
-    {
-        return tap(row * 5 + column);
-    }
-
     // i番目のセルをタップした時の次のボードの状態を返す。
     public Board tap(int i)
     {
@@ -69,10 +63,6 @@ public class Board
 
     /**
      * 矢印にそって矢印を消していく。
-     *
-     * @param i
-     * @param board
-     * @return
      */
     static Board removeUntilTermination(int i, Board board)
     {
@@ -137,8 +127,6 @@ public class Board
 
     /**
      * i番目のセルの矢印の向きを取得
-     *
-     * @param i
      * @return 0 -> top, 1 -> right, 2 -> bottom, 3 -> left
      */
     public int arrowTypeAt(int i)
@@ -174,8 +162,6 @@ public class Board
 
     /**
      * 矢印を下に落とした時のボードを返す。
-     *
-     * @return
      */
     public Board dropDown()
     {
@@ -191,12 +177,12 @@ public class Board
         Board board = Board.createFromString(this.toString());
         for (int i = 3; i >= 0; i--) {
             boolean allBlankOnAColumn =
-                    (!board.arrowExistsAt(0, i)) &&
-                    (!board.arrowExistsAt(1, i)) &&
-                    (!board.arrowExistsAt(2, i)) &&
-                    (!board.arrowExistsAt(3, i)) &&
-                    (!board.arrowExistsAt(4, i));
-            if(allBlankOnAColumn) {
+                   /**/     (!board.arrowExistsAt(0, i)) &&
+                            (!board.arrowExistsAt(1, i)) &&
+                            (!board.arrowExistsAt(2, i)) &&
+                            (!board.arrowExistsAt(3, i)) &&
+                            (!board.arrowExistsAt(4, i));
+            if (allBlankOnAColumn) {
                 board = board.removeBlankColumn(i);
             }
         }
@@ -211,7 +197,7 @@ public class Board
         for (int row = 0; row < 5; row++) {
             String sn = s.substring(row * 5, row * 5 + 5);
             sb.append(sn.substring(0, column));
-            sb.append(sn.substring(column+1));
+            sb.append(sn.substring(column + 1));
             sb.append(' ');
         }
 
@@ -220,8 +206,6 @@ public class Board
 
     /**
      * （矢印の向きはそのままに）位置を時計回りに90度回転したものを返す
-     *
-     * @return
      */
     Board rotateCW()
     {
@@ -240,8 +224,6 @@ public class Board
 
     /**
      * （矢印の向きはそのままに）位置を反時計回りに90度回転したものを返す
-     *
-     * @return
      */
     Board rotateCCW()
     {
@@ -260,8 +242,6 @@ public class Board
 
     /**
      * 矢印を左に落とした時のボードを返す。
-     *
-     * @return
      */
     public Board dropLeft()
     {
