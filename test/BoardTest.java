@@ -132,4 +132,26 @@ public class BoardTest
         String string = "ttttt rrrrlllllbbbbbttttt";
         Assert.assertEquals(string, Board.createFromString(string).toString());
     }
+
+    @Test
+    public void testRemoveBlankColumns() throws Exception
+    {
+        Board board = Board.createFromString(
+                /*    */  "tt   "
+                        + "r    "
+                        + "ll  l"
+                        + "b   b"
+                        + "tt  t"
+        );
+
+        Board expectedBoard = Board.createFromString(
+                /*    */  "tt   "
+                        + "r    "
+                        + "lll  "
+                        + "b b  "
+                        + "ttt  "
+        );
+
+        Assert.assertEquals(expectedBoard, board.removeBlankColumns());
+    }
 }

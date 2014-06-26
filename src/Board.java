@@ -64,7 +64,7 @@ public class Board
         Board newBoard = removeUntilTermination(i, this);
 
         // 矢印を下、左に落とす
-        return newBoard.dropDown().dropLeft();
+        return newBoard.dropDown().removeBlankColumns();
     }
 
     /**
@@ -180,6 +180,42 @@ public class Board
     public Board dropDown()
     {
         return this.rotateCW().dropLeft().rotateCCW();
+    }
+
+    /**
+     * 空の行があれば、左に詰めたものを返す。
+     */
+    // TODO: Better naming of this method?
+    public Board removeBlankColumns()
+    {
+        Board board = Board.createFromString(this.toString());
+        for (int i = 3; i >= 0; i--) {
+            boolean allBlankOnAColumn =
+                    (!board.arrowExistsAt(0, i)) &&
+                    (!board.arrowExistsAt(1, i)) &&
+                    (!board.arrowExistsAt(2, i)) &&
+                    (!board.arrowExistsAt(3, i)) &&
+                    (!board.arrowExistsAt(4, i));
+            if(allBlankOnAColumn) {
+                board = board.removeBlankColumn(i);
+            }
+        }
+
+        return board;
+    }
+
+    private Board removeBlankColumn(int column)
+    {
+        String s = this.toString();
+        StringBuilder sb = new StringBuilder();
+        for (int row = 0; row < 5; row++) {
+            String sn = s.substring(row * 5, row * 5 + 5);
+            sb.append(sn.substring(0, column));
+            sb.append(sn.substring(column+1));
+            sb.append(' ');
+        }
+
+        return Board.createFromString(sb.toString());
     }
 
     /**
