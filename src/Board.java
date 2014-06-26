@@ -8,8 +8,8 @@ import java.util.List;
 public class Board
 {
     // 矢印が{top, right, bottom, left}向きだった時にrow, columnはどのように動くべきか。
-    private static final int[] dx = { 0,  1,  0, -1};
-    private static final int[] dy = {-1,  0,  1,  0};
+    private static final int[] dx = {0, 1, 0, -1};
+    private static final int[] dy = {-1, 0, 1, 0};
 
     long arrows;
     int existence;
@@ -135,6 +135,7 @@ public class Board
 
     /**
      * i番目のセルの矢印の向きを取得
+     *
      * @param i
      * @return 0 -> top, 1 -> right, 2 -> bottom, 3 -> left
      */
@@ -269,13 +270,21 @@ public class Board
     {
         StringBuffer sb = new StringBuffer(26);
         for (int i = 0; i < 25; i++) {
-            if(arrowExistsAt(i)) {
+            if (arrowExistsAt(i)) {
                 int arrowType = arrowTypeAt(i);
                 switch (arrowType) {
-                    case 0: sb.append('t'); break;
-                    case 1: sb.append('r'); break;
-                    case 2: sb.append('b'); break;
-                    case 3: sb.append('l'); break;
+                    case 0:
+                        sb.append('t');
+                        break;
+                    case 1:
+                        sb.append('r');
+                        break;
+                    case 2:
+                        sb.append('b');
+                        break;
+                    case 3:
+                        sb.append('l');
+                        break;
                 }
             }
             else {

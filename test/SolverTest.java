@@ -6,7 +6,6 @@ import java.util.List;
 
 public class SolverTest
 {
-
     @Test
     public void testSolve() throws Exception
     {

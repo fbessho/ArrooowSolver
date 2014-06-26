@@ -35,8 +35,9 @@ public class BoardTest
             int row = i / 5;
             int column = i % 5;
             if (untappableCells.contains(i)) {
-                Assert.assertFalse("Cell " + i + " should be untappable",  board.tappable(row, column));
-            } else {
+                Assert.assertFalse("Cell " + i + " should be untappable", board.tappable(row, column));
+            }
+            else {
                 Assert.assertTrue("Cell " + i + " should be tappable", board.tappable(row, column));
             }
         }
