@@ -60,17 +60,40 @@ public class Board
 
     }
 
-    private static Board removeAndGoNext(int i, Board board)
+    /**
+     * 矢印にそって矢印を消していく。
+     *
+     * @param i
+     * @param board
+     * @return
+     */
+    static Board removeUntilTermination(int i, Board board)
     {
         int currentRow = i / 5;
         int currentColumn = i % 5;
 
-        int mask = ~(1 << (24-i));
-        int existence = board.existence & mask;
+        Board newBoard = new Board(board.arrows, board.existence);
 
+        // 矢印の指すセルを見つける
         int arrayType = board.arrayTypeAt(i);
-        // int nextRow =
-        return null;
+        int nextRow = currentRow + dy[arrayType];
+        int nextColumn = currentColumn + dx[arrayType];
+        int nextIndex = nextRow * 5 + nextColumn;
+
+        // 指定されたセルを消す
+        int shift = 24 - i;
+        int existenceMask = ~(1 << shift);
+        long arrowsMask= ~(11L << (shift * 2) );
+        newBoard.existence = newBoard.existence & existenceMask;
+        newBoard.arrows = newBoard.arrows & arrowsMask;
+
+        // 矢印の指すセルが存在しなければ終了、そうでなければ矢印をたどることを繰り返す
+        if (!newBoard.arrowExistsAt(nextRow, nextColumn)) {
+            return newBoard;
+        }
+        else {
+            return Board.removeUntilTermination(nextIndex, newBoard);
+        }
     }
 
     public Board tapInSequence(List<Integer> sequence)

@@ -40,6 +40,13 @@ public class BoardTest
                 Assert.assertTrue("Cell " + i + " should be tappable", board.tappable(row, column));
             }
         }
+    }
 
+    @Test
+    public void testRemoveUntilTermination() throws Exception
+    {
+        Board board = Board.createFromString("tttttrrrrrlllllbbbbbttttt");
+        Board newBoard = Board.removeUntilTermination(6, board);
+        Assert.assertEquals(Board.createFromString("ttttt" + "r    " + "lllll" + "bbbbb" + "ttttt"), newBoard);
     }
 }
