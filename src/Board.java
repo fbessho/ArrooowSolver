@@ -75,7 +75,7 @@ public class Board
         Board newBoard = new Board(board.arrows, board.existence);
 
         // 矢印の指すセルを見つける
-        int arrayType = board.arrayTypeAt(i);
+        int arrayType = board.arrowTypeAt(i);
         int nextRow = currentRow + dy[arrayType];
         int nextColumn = currentColumn + dx[arrayType];
         int nextIndex = nextRow * 5 + nextColumn;
@@ -133,7 +133,7 @@ public class Board
      * @param i
      * @return 0 -> top, 1 -> right, 2 -> bottom, 3 -> left
      */
-    public int arrayTypeAt(int i)
+    public int arrowTypeAt(int i)
     {
         int shift = (24 - i) * 2;
         long mask = 3L << shift;
@@ -149,7 +149,7 @@ public class Board
         }
 
         int i = row * 5 + column;
-        int arrowType = arrayTypeAt(i);
+        int arrowType = arrowTypeAt(i);
 
         final int nextRow = row + dy[arrowType];
         final int nextColumn = column + dx[arrowType];
