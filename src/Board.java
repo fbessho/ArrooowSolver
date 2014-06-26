@@ -186,4 +186,26 @@ public class Board
         result = 31 * result + existence;
         return result;
     }
+
+    @Override
+    public String toString()
+    {
+        StringBuffer sb = new StringBuffer(26);
+        for (int i = 0; i < 25; i++) {
+            if(arrowExistsAt(i)) {
+                int arrowType = arrowTypeAt(i);
+                switch (arrowType) {
+                    case 0: sb.append('t'); break;
+                    case 1: sb.append('r'); break;
+                    case 2: sb.append('b'); break;
+                    case 3: sb.append('l'); break;
+                }
+            }
+            else {
+                sb.append(' ');
+            }
+        }
+
+        return sb.toString();
+    }
 }

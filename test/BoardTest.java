@@ -49,4 +49,11 @@ public class BoardTest
         Board newBoard = Board.removeUntilTermination(6, board);
         Assert.assertEquals(Board.createFromString("ttttt" + "r    " + "lllll" + "bbbbb" + "ttttt"), newBoard);
     }
+
+    @Test
+    public void testToString() throws Exception
+    {
+        String string = "ttttt rrrrlllllbbbbbttttt";
+        Assert.assertEquals(string, Board.createFromString(string).toString());
+    }
 }
