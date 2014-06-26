@@ -90,7 +90,7 @@ public class Board
         // 指定されたセルを消す
         int shift = 24 - i;
         int existenceMask = ~(1 << shift);
-        long arrowsMask = ~(11L << (shift * 2));
+        long arrowsMask = ~(3L << (shift * 2));
         newBoard.existence = newBoard.existence & existenceMask;
         newBoard.arrows = newBoard.arrows & arrowsMask;
 
