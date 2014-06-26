@@ -26,4 +26,18 @@ public class Solver
         // unsolved
         return null;
     }
+
+    public static void main(String[] args)
+    {
+        Board board = Board.createFromString(args[0]);
+        List<Integer> solvedSequence = new Solver().solve(board);
+
+        int count = 1;
+        for (int i : solvedSequence) {
+            int row = i / 5;
+            int column = i % 5;
+            System.out.println(String.format("[%2d] row: %d, column %d", count, row + 1, column + 1));
+            count++;
+        }
+    }
 }
