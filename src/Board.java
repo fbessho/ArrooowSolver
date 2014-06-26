@@ -270,7 +270,7 @@ public class Board
     @Override
     public String toString()
     {
-        StringBuffer sb = new StringBuffer(26);
+        StringBuilder sb = new StringBuilder(26);
         for (int i = 0; i < 25; i++) {
             if (arrowExistsAt(i)) {
                 int arrowType = arrowTypeAt(i);
