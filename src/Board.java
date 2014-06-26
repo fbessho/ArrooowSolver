@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 /**
@@ -53,11 +55,14 @@ public class Board
     public Board tap(int i)
     {
         if (!tappable(i)) {
-            throw new RuntimeException("Tap illegal cell (untappable).");
+            throw new RuntimeException("Tap an illegal cell (untappable).");
         }
-        return null;
 
+        // 矢印にそって矢印を消す
+        Board newBoard = removeUntilTermination(i, this);
 
+        // 矢印を下、左に落とす
+        return newBoard.dropDown().dropLeft();
     }
 
     /**
@@ -83,7 +88,7 @@ public class Board
         // 指定されたセルを消す
         int shift = 24 - i;
         int existenceMask = ~(1 << shift);
-        long arrowsMask= ~(11L << (shift * 2) );
+        long arrowsMask = ~(11L << (shift * 2));
         newBoard.existence = newBoard.existence & existenceMask;
         newBoard.arrows = newBoard.arrows & arrowsMask;
 
@@ -164,6 +169,78 @@ public class Board
         return tappable(row, column);
     }
 
+    /**
+     * 矢印を下に落とした時のボードを返す。
+     *
+     * @return
+     */
+    public Board dropDown()
+    {
+        return this.rotateCW().dropLeft().rotateCCW();
+    }
+
+    /**
+     * （矢印の向きはそのままに）位置を時計回りに90度回転したものを返す
+     *
+     * @return
+     */
+    Board rotateCW()
+    {
+        String s = this.toString();
+        StringBuilder sb = new StringBuilder();
+
+        for (int column = 0; column < 5; column++) {
+            for (int row = 4; row >= 0; row--) {
+                int i = row * 5 + column;
+                sb.append(s.charAt(i));
+            }
+        }
+
+        return Board.createFromString(sb.toString());
+    }
+
+    /**
+     * （矢印の向きはそのままに）位置を反時計回りに90度回転したものを返す
+     *
+     * @return
+     */
+    Board rotateCCW()
+    {
+        String s = this.toString();
+        StringBuilder sb = new StringBuilder();
+
+        for (int column = 4; column >= 0; column--) {
+            for (int row = 0; row < 5; row++) {
+                int i = row * 5 + column;
+                sb.append(s.charAt(i));
+            }
+        }
+
+        return Board.createFromString(sb.toString());
+    }
+
+    /**
+     * 矢印を左に落とした時のボードを返す。
+     *
+     * @return
+     */
+    public Board dropLeft()
+    {
+        String s = this.toString();
+        StringBuilder sb = new StringBuilder();
+
+        for (int row = 0; row < 5; row++) {
+            String si = s.substring(row * 5, (row + 1) * 5); // String of each row
+            int numOfSpace = StringUtils.countMatches(si, " ");
+
+            sb.append(si.replaceAll(" ", ""));
+            for (int i = 0; i < numOfSpace; i++) {
+                sb.append(' ');
+            }
+        }
+
+        return Board.createFromString(sb.toString());
+    }
 
     @Override
     public boolean equals(Object o)

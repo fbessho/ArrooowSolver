@@ -51,6 +51,81 @@ public class BoardTest
     }
 
     @Test
+    public void testRotateCW() throws Exception
+    {
+        Board board = Board.createFromString("tttttrrrrrlllllbbbbbttttt");
+        Board expectedBoard = Board.createFromString(
+                /**/    "tblrt" +
+                        "tblrt" +
+                        "tblrt" +
+                        "tblrt" +
+                        "tblrt"
+        );
+
+        Assert.assertEquals(expectedBoard, board.rotateCW());
+    }
+
+    @Test
+    public void testRotateCCW() throws Exception
+    {
+        Board board = Board.createFromString("tttttrrrrrlllllbbbbbttttt");
+        Board expectedBoard = Board.createFromString(
+                /**/    "trlbt" +
+                        "trlbt" +
+                        "trlbt" +
+                        "trlbt" +
+                        "trlbt"
+        );
+
+        Assert.assertEquals(expectedBoard, board.rotateCCW());
+    }
+
+
+    @Test
+    public void testDropDown() throws Exception
+    {
+        Board board = Board.createFromString(
+                /*    */  "tt t "
+                        + "r rr "
+                        + "ll  l"
+                        + "b   b"
+                        + "ttt t"
+        );
+
+        Board expectedBoard = Board.createFromString(
+                /*    */  "t    "
+                        + "r    "
+                        + "lt  l"
+                        + "blrtb"
+                        + "tttrt"
+        );
+
+        Assert.assertEquals(expectedBoard, board.dropDown());
+    }
+
+    @Test
+    public void testDropLeft() throws Exception
+    {
+        Board board = Board.createFromString(
+                /*    */  "tt t "
+                        + "r rr "
+                        + "ll  l"
+                        + "b   b"
+                        + "ttt t"
+        );
+
+        Board expectedBoard = Board.createFromString(
+                /*    */  "ttt  "
+                        + "rrr  "
+                        + "lll  "
+                        + "bb   "
+                        + "tttt "
+        );
+
+        Assert.assertEquals(expectedBoard, board.dropLeft());
+    }
+
+    @Test
     public void testToString() throws Exception
     {
         String string = "ttttt rrrrlllllbbbbbttttt";
