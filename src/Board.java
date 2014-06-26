@@ -128,8 +128,8 @@ public class Board
         int i = row * 5 + column;
         int arrowType = arrayTypeAt(i);
 
-        final int nextRow = row + dx[arrowType];
-        final int nextColumn = column + dy[arrowType];
+        final int nextRow = row + dy[arrowType];
+        final int nextColumn = column + dx[arrowType];
 
         return arrowExistsAt(nextRow, nextColumn);
     }
