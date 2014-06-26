@@ -11,6 +11,8 @@ public class Board
     private static final int[] dx = {0, 1, 0, -1};
     private static final int[] dy = {-1, 0, 1, 0};
 
+    private static final char[] arrowTypes = {'t', 'r', 'b', 'l'};
+
     long arrows;
     int existence;
 
@@ -272,20 +274,7 @@ public class Board
         for (int i = 0; i < 25; i++) {
             if (arrowExistsAt(i)) {
                 int arrowType = arrowTypeAt(i);
-                switch (arrowType) {
-                    case 0:
-                        sb.append('t');
-                        break;
-                    case 1:
-                        sb.append('r');
-                        break;
-                    case 2:
-                        sb.append('b');
-                        break;
-                    case 3:
-                        sb.append('l');
-                        break;
-                }
+                sb.append(arrowTypes[arrowType]);
             }
             else {
                 sb.append(' ');
