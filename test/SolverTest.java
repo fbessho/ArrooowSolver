@@ -4,7 +4,9 @@ import com.gs.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SolverTest
 {
@@ -76,13 +78,44 @@ public class SolverTest
         );
 
         Stopwatch sw = Stopwatch.createUnstarted();
+
+        // TODO: better variable names?
+        List<String> records = FastList.newList();
+        List<Long> recordsInMicroSec = FastList.newList();
+        long sum = 0;
+
         for (int i = 0; i < 40; i++) {
             sw.start();
-            System.out.println(String.format("----------\nStage %d\n", i+1));
+            System.out.println(String.format("----------\nStage %d\n", i + 1));
             Solver.main(new String[]{stageList.get(i)});
             sw.stop();
             System.out.println("(" + sw + ")");
+
+            // collect info for summary
+            records.add(sw.toString());
+            long elapsed = sw.elapsed(TimeUnit.MICROSECONDS);
+            recordsInMicroSec.add(elapsed);
+            sum += elapsed;
+
             sw.reset();
+        }
+
+        // -------------
+        // Print summary
+        System.out.println("\n----- Summary -----");
+
+        // max, min, ave
+        long max_microsec = Collections.max(recordsInMicroSec);
+        long min_microsec = Collections.min(recordsInMicroSec);
+        long ave_microsec = sum / 40;
+        System.out.println("Max: " + max_microsec/1000 + "ms");
+        System.out.println("Min: " + min_microsec + "μs");
+        System.out.println("Ave: " + ave_microsec/1000 + "ms");
+        System.out.println();
+
+        // Record for each stage
+        for (int i = 0; i < 40; i++) {
+            System.out.println(String.format("Stage %2d: %s", i + 1, records.get(i)));
         }
     }
 }
