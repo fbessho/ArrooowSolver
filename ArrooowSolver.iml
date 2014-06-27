@@ -11,6 +11,7 @@
     <orderEntry type="library" name="gs-collections-4.2" level="application" />
     <orderEntry type="library" scope="TEST" name="junit-4.11" level="application" />
     <orderEntry type="library" name="commons-lang3-3.3" level="application" />
+    <orderEntry type="library" scope="TEST" name="guava-17.0" level="application" />
   </component>
 </module>
 
