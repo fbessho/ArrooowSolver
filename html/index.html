@@ -1,0 +1,35 @@
+﻿<!-- Creating based on the following tutorial -->
+<!-- http://ja.d3js.info/alignedleft/tutorials/d3/drawing-svgs/ -->
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <title>D3 Test</title>
+            <script type="text/javascript" src="d3/d3.js"></script>
+            <style type="text/css">
+                div.bar {
+                    display: inline-block;
+                    width: 20px;
+                    height: 75px;   /* この数値は実行時に上書きされます */
+                    background-color: teal;
+                    margin-right: 5px;
+                }
+                
+                svg .blue_circle {
+                    fill: blue;
+                }
+            </style>
+        </head>
+        <body>
+            <script type="text/javascript">
+                var dataset = [5, 10, 15, 20, 25];
+                var svg = d3.select("body").append("svg").attr("width", 500).attr("height", 1000);
+                svg.selectAll("circle").data(dataset).enter()
+                    .append("circle")
+                    .attr("class", "blue_circle")
+                    .attr("cx", function(d, i) { return (i * 50) + 25; })
+                    .attr("cy", 100)
+                    .attr("r", function(d) { return d; });
+            </script>
+        </body>
+</html>
