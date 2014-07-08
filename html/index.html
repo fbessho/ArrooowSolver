@@ -3,9 +3,7 @@
 <!DOCTYPE html>
     <html lang="en">
         <head>
-            <meta charset="utf-8                    .attr("x", function(d, i) { return i * 20 + 1; })
-                    .attr("y", function(d) { return h - d * 4; })
-">
+            <meta charset="utf-8">
             <title>D3 Test</title>
             <script type="text/javascript" src="d3/d3.js"></script>
             <style type="text/css">
@@ -43,7 +41,8 @@
 
                 // draw white texts
                 svg.selectAll("text").data(dataset).enter().append("text")
-                    .attr("x", function(d, i) { return i * 20 + 3; })
+                    .attr("text-anchor", "middle")
+                    .attr("x", function(d, i) { return i * 20 + 10; })
                     .attr("y", function(d) { return h - d * 4 + 15; })
                     .attr("class", "bar-value")
                     .text(function(d) { return d; });
