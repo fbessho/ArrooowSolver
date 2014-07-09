@@ -7,11 +7,11 @@ import java.util.List;
  */
 public class Board
 {
-    // 矢印が{top, right, bottom, left}向きだった時にrow, columnはどのように動くべきか。
+    // 矢印が{up, right, down, left}向きだった時にrow, columnはどのように動くべきか。
     private static final int[] dx = {0, 1, 0, -1};
     private static final int[] dy = {-1, 0, 1, 0};
 
-    private static final char[] arrowTypes = {'t', 'r', 'b', 'l'};
+    private static final char[] ARROW_TYPES = {'u', 'r', 'd', 'l'};
     private static final String BLANK = ".";
     private static final char BLANK_C = BLANK.charAt(0);
 
@@ -33,10 +33,10 @@ public class Board
         }
 
         // arrows
-        s = s.replace("t", "00");
-        s = s.replace("r", "01");
-        s = s.replace("b", "10");
-        s = s.replace("l", "11");
+        s = s.replace(String.valueOf(ARROW_TYPES[0]), "00");
+        s = s.replace(String.valueOf(ARROW_TYPES[1]), "01");
+        s = s.replace(String.valueOf(ARROW_TYPES[2]), "10");
+        s = s.replace(String.valueOf(ARROW_TYPES[3]), "11");
         s = s.replace(BLANK, "00");
         long arrows = Long.parseLong(s, 2);
 
@@ -292,7 +292,7 @@ public class Board
         for (int i = 0; i < 25; i++) {
             if (arrowExistsAt(i)) {
                 int arrowType = arrowTypeAt(i);
-                sb.append(arrowTypes[arrowType]);
+                sb.append(ARROW_TYPES[arrowType]);
             }
             else {
                 sb.append(BLANK);

@@ -13,7 +13,7 @@ public class SolverTest
     @Test
     public void testSolve1() throws Exception
     {
-        Board board = Board.createFromString("rrrrb" + "bllll" + "rrrrb" + "bllll" + "rrrrr");
+        Board board = Board.createFromString("rrrrd" + "dllll" + "rrrrd" + "dllll" + "rrrrr");
         List<Integer> sequence = new Solver().solve(board);
         Assert.assertNotNull(sequence);
         Verify.assertTrue(board.tapInSequence(sequence).isSolved());
@@ -22,7 +22,7 @@ public class SolverTest
     @Test
     public void testSolve2() throws Exception
     {
-        Board board = Board.createFromString("lblrb" + "tltrl" + "trrbt" + "bbtrb" + "lrrrl");
+        Board board = Board.createFromString("ldlrd" + "ulurl" + "urrdu" + "ddurd" + "lrrrl");
         List<Integer> sequence = new Solver().solve(board);
         Assert.assertNotNull(sequence);
         Verify.assertTrue(board.tapInSequence(sequence).isSolved());
