@@ -9,7 +9,7 @@ public class BoardTest
     @Test
     public void testCreateFromString()
     {
-        Board board = Board.createFromString("tttttrrrrrlllllbbbbbttttt");
+        Board board = Board.createFromString("uuuuurrrrrlllllddddduuuuu");
         Assert.assertEquals(Long.parseLong("0000000000" + "0101010101" + "1111111111" + "1010101010" + "0000000000", 2), board.arrows);
         Assert.assertEquals(Integer.parseInt("11111" + "11111" + "11111" + "11111" + "11111", 2), board.existence);
     }
@@ -17,7 +17,7 @@ public class BoardTest
     @Test
     public void testArrowExistsAt() throws Exception
     {
-        Board board = Board.createFromString("ttttt" + "....." + "....." + "....." + ".....");
+        Board board = Board.createFromString("uuuuu" + "....." + "....." + "....." + ".....");
         for (int i = 0; i < 5; i++) {
             Assert.assertTrue(board.arrowExistsAt(i));
         }
@@ -29,7 +29,7 @@ public class BoardTest
     @Test
     public void testTappable() throws Exception
     {
-        Board board = Board.createFromString("tttttrrrrrlllllbbbbbttttt");
+        Board board = Board.createFromString("uuuuurrrrrlllllddddduuuuu");
         Set<Integer> untappableCells = UnifiedSet.newSetWith(0, 1, 2, 3, 4, 9, 10);
         for (int i = 0; i < 25; i++) {
             int row = i / 5;
@@ -46,21 +46,21 @@ public class BoardTest
     @Test
     public void testRemoveUntilTermination() throws Exception
     {
-        Board board = Board.createFromString("tttttrrrrrlllllbbbbbttttt");
+        Board board = Board.createFromString("uuuuurrrrrlllllddddduuuuu");
         Board newBoard = Board.removeUntilTermination(6, board);
-        Assert.assertEquals(Board.createFromString("ttttt" + "r...." + "lllll" + "bbbbb" + "ttttt"), newBoard);
+        Assert.assertEquals(Board.createFromString("uuuuu" + "r...." + "lllll" + "ddddd" + "uuuuu"), newBoard);
     }
 
     @Test
     public void testRotateCW() throws Exception
     {
-        Board board = Board.createFromString("tttttrrrrrlllllbbbbbttttt");
+        Board board = Board.createFromString("uuuuurrrrrlllllddddduuuuu");
         Board expectedBoard = Board.createFromString(
-                /**/    "tblrt" +
-                        "tblrt" +
-                        "tblrt" +
-                        "tblrt" +
-                        "tblrt"
+                /**/    "udlru" +
+                        "udlru" +
+                        "udlru" +
+                        "udlru" +
+                        "udlru"
         );
 
         Assert.assertEquals(expectedBoard, board.rotateCW());
@@ -69,13 +69,13 @@ public class BoardTest
     @Test
     public void testRotateCCW() throws Exception
     {
-        Board board = Board.createFromString("tttttrrrrrlllllbbbbbttttt");
+        Board board = Board.createFromString("uuuuurrrrrlllllddddduuuuu");
         Board expectedBoard = Board.createFromString(
-                /**/    "trlbt" +
-                        "trlbt" +
-                        "trlbt" +
-                        "trlbt" +
-                        "trlbt"
+                /**/    "urldu" +
+                        "urldu" +
+                        "urldu" +
+                        "urldu" +
+                        "urldu"
         );
 
         Assert.assertEquals(expectedBoard, board.rotateCCW());
@@ -86,19 +86,19 @@ public class BoardTest
     public void testDropDown() throws Exception
     {
         Board board = Board.createFromString(
-                /*    */  "tt.t."
+                /*    */  "uu.u."
                         + "r.rr."
                         + "ll..l"
-                        + "b...b"
-                        + "ttt.t"
+                        + "d...d"
+                        + "uuu.u"
         );
 
         Board expectedBoard = Board.createFromString(
-                /*    */  "t...."
+                /*    */  "u...."
                         + "r...."
-                        + "lt..l"
-                        + "blrtb"
-                        + "tttrt"
+                        + "lu..l"
+                        + "dlrud"
+                        + "uuuru"
         );
 
         Assert.assertEquals(expectedBoard, board.dropDown());
@@ -108,19 +108,19 @@ public class BoardTest
     public void testDropLeft() throws Exception
     {
         Board board = Board.createFromString(
-                /*    */  "tt.t."
+                /*    */  "uu.u."
                         + "r.rr."
                         + "ll..l"
-                        + "b...b"
-                        + "ttt.t"
+                        + "d...d"
+                        + "uuu.u"
         );
 
         Board expectedBoard = Board.createFromString(
-                /*    */  "ttt.."
+                /*    */  "uuu.."
                         + "rrr.."
                         + "lll.."
-                        + "bb..."
-                        + "tttt."
+                        + "dd..."
+                        + "uuuu."
         );
 
         Assert.assertEquals(expectedBoard, board.dropLeft());
@@ -129,7 +129,7 @@ public class BoardTest
     @Test
     public void testToString() throws Exception
     {
-        String string = "ttttt.rrrrlllllbbbbbttttt";
+        String string = "uuuuu.rrrrlllllddddduuuuu";
         Assert.assertEquals(string, Board.createFromString(string).toString());
     }
 
@@ -137,19 +137,19 @@ public class BoardTest
     public void testRemoveBlankColumns() throws Exception
     {
         Board board = Board.createFromString(
-                /*    */  "tt..."
+                /*    */  "uu..."
                         + "r...."
                         + "ll..l"
-                        + "b...b"
-                        + "tt..t"
+                        + "d...d"
+                        + "uu..u"
         );
 
         Board expectedBoard = Board.createFromString(
-                /*    */  "tt..."
+                /*    */  "uu..."
                         + "r...."
                         + "lll.."
-                        + "b.b.."
-                        + "ttt.."
+                        + "d.d.."
+                        + "uuu.."
         );
 
         Assert.assertEquals(expectedBoard, board.removeBlankColumns());
